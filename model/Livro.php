@@ -1,5 +1,5 @@
 <?php
-require "../config/database.php";
+require_once "./config/database.php";
 
 class Livro{
     private $conexao;
@@ -12,7 +12,7 @@ class Livro{
     public $genero;
 
     public function __construct($db){
-        $this->conexao$conexao = $db;
+        $this->conexao = $db;
     }
 
     public function getIdLivro($id){
@@ -21,8 +21,10 @@ class Livro{
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function registrarLivro(){
-        $query = "INSERT INTO{$this->tabela}(titulo, autor, genero) VALUES ({$this->titulo}, {$this->autor}, {$this->genero});";
+    public function cadastrarLivro(){
+        $query = "INSERT INTO {$this->tabela} (titulo, autor, genero) VALUES ('{$this->titulo}', '{$this->autor}', '{$this->genero}');";
+        $resultado = $this->conexao->query($query);
+        return $resultado;
     }
 }
 
